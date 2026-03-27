@@ -1,10 +1,11 @@
 # 오늘 뭐 먹지? '메뉴 랜덤 뽑기 & 맛집 지도'
 <img width="1536" height="1024" alt="ChatGPT Image 2026년 3월 27일 오후 05_52_28" src="https://github.com/user-attachments/assets/e5af55dc-dd6b-4db7-a95a-a03d6147f771" />
 
-***학번:** 22411896
-***성명:** 노혜인 
-***이메일:** alkawll5468@naver.com 
+**학번:** 22411896
+**성명:** 노혜인 
+**이메일:** alkawll5468@naver.com 
 
+**repository주소:** https://github.com/hyein1010/Project_OSS_2026_1
 ---
 ### [ Revision history ]
 | Revision date | Version # | Description | Author |

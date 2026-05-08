@@ -12,6 +12,7 @@
 | :--- | :--- | :--- | :--- |
 | 03/27/2026 | 1.0.0 | FirstDraft | 노혜인 |
 | 05/08/2026 | 1.0.1 | Adding functions | 노혜인 |
+| 05/08/2026 | 1.0.2 | Deleting function | 노혜인 |
 
 ---
 
@@ -38,7 +39,7 @@
 ---
 
 ## 2. System context diagram
-<img width="1536" height="1024" alt="ChatGPT Image 2026년 3월 27일 오후 05_30_49" src="https://github.com/user-attachments/assets/db4da229-b0d8-4b76-a4e4-4c81f2b8b02f" />
+<img width="1300" height="800" alt="ChatGPT Image 2026년 5월 8일 오후 12_07_26" src="https://github.com/user-attachments/assets/3588341f-975e-414d-9e4f-1ff2d5ecf75c" />
 
 * 로그인 (Login)
 * 회원가입 (Sign up)
@@ -50,7 +51,6 @@
 * 운영시간 외 가게 뮤트(Operating hours)
 * 리뷰작성 (Writing review)
 * 리뷰삭제 (Deleting review)
-* 광고 파트너십 (Ad/Partnership)
 * 본인인증 (Identity verification)
 
 ---
@@ -61,16 +61,15 @@
 | :--- | :--- | :--- | :--- |
 | 1 | **Login** | User | 고객이 각자 자신의 아이디로 로그인한다. 
 | 2 | **Sign up** | User | 고객이 각자 자신의 아이디와 비밀번호를 등록하여 회원가입한다. 
-| 3 | **Menu recommendation** | User, System | 메뉴 추천 버튼을 눌러 오늘의 메뉴 추천을 받는다. 
-| 4 | **Favorites** | User, Data analysis | 자주 방문하는 식당에 즐겨찾기 버튼을 누른다. 
+| 3 | **Menu recommendation** | User | 메뉴 추천 버튼을 눌러 오늘의 메뉴 추천을 받는다. 
+| 4 | **Favorites** | User | 자주 방문하는 식당에 즐겨찾기 버튼을 누른다. 
 | 5 | **Filtering** | User | 각 요소에 체크하여 필터를 적용한다.
 | 6 | **Map** | User | 지도를 통해 가게의 위치를 확인한다.
 | 7 | **Detailed** | User | 가게 아이콘을 눌러 상세 정보를 확인한다. 
 | 8 | **Operating hours** | User | 운영시간 외의 가게 아이콘은 회색으로 뮤트된다. 
 | 9 | **Writing review** | User | 가게에 방문 후 사진과 텍스트를 입력하여 리뷰를 작성한다.
-| 10 | **Deleting review** | User | 작성한 리뷰를 삭제한다.
-| 11 | **Ad/Partnership** | Restaurant/Business Partner, User | 광고영상이나 사진을 통해 가게를 홍보한다. 
-| 12 | **Identity verification** | User | 간편인증을 통해 본인인증을 한다. 
+| 10 | **Deleting review** | User | 작성한 리뷰를 삭제한다. 
+| 11 | **Identity verification** | User | 간편인증을 통해 본인인증을 한다. 
 
 ---
 
@@ -90,8 +89,7 @@
 | 8 | **Operating hours** | 현재 방문 가능한 식당을 시각적으로 구분 | 영업시간 외 식당의 아이콘을 회색으로 처리(Mute) | 지도 화면 로딩 시 서버 시간과 식당 영업시간 비교 | 불필요한 방문 방지 및 서비스 실용성을 강화한다. |
 | 9 | **Writing review** | 실제 방문 경험 공유 및 서비스 신뢰도 확보 | 방문 인증 후 텍스트와 사진을 포함한 리뷰 작성/업로드 | 식사 완료 후 다른 사용자에게 정보를 공유하고자 할 때 | 실제 데이터 기반의 정확한 추천 품질을 유지한다. |
 | 10 | **Deleting review** | 작성한 리뷰에 대한 삭제권리 부여 | 작성/업로드한 리뷰 삭제 | 잘못 작성한 또는 잘못된 정보 등의 이유로 리뷰를 삭제하고자 할 때 | 정확하고 솔직한 정보를 제공하기 위한 수단으로써 활용된다. |
-| 11 | **Ad/Partnership** | 수익 창출 및 지역 음식점 홍보 기회 제공 | 광고 배너 또는 추천 리스트 상단에 파트너십 매장 노출 | 앱 메인 화면이나 메뉴 추천 결과 화면 노출 시 | 플랫폼의 수익 모델 확장 및 제휴 업체를 홍보한다. |
-| 12 | **Identity verification** | 보안 강화 및 허위 계정 생성 방지 | 간편인증 API를 연동하여 실명 및 본인 여부 확인 | 회원가입 또는 특정 개인정보 변경 절차 진행 시 | 데이터 보호 및 시스템 보안성을 확보한다. | 
+| 11 | **Identity verification** | 보안 강화 및 허위 계정 생성 방지 | 간편인증 API를 연동하여 실명 및 본인 여부 확인 | 회원가입 또는 특정 개인정보 변경 절차 진행 시 | 데이터 보호 및 시스템 보안성을 확보한다. | 
 ---
 
 ## 5. Problem statement
@@ -112,8 +110,7 @@
 
 | Terms | Description |
 | :--- | :--- |
-| 소비자 | 메뉴 추천을 받고 음식점을 탐색 및 주문하는 사용자 | 
-| 판매자 | 시스템 전반을 관리하며 사용자 및 데이터를 관리하는 사용자 | 
+| 소비자 | 메뉴 추천을 받고 음식점을 탐색 및 주문하는 사용자 |  
 | 관리자 | 시스템 전반을 관리하며 사용자 및 데이터를 관리하는 사용자 | 
 | 지도 기능 | 사용자 위치 기반으로 음식점을 표시하는 기능 | 
 | 메뉴 추천 | 사용자 취향 및 조건에 맞는 음식을 추천하는 기능 |

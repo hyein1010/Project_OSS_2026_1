@@ -13,6 +13,7 @@
 | 03/27/2026 | 1.0.0 | FirstDraft | 노혜인 |
 | 05/08/2026 | 1.0.1 | Adding functions | 노혜인 |
 | 05/08/2026 | 1.0.2 | Deleting function | 노혜인 |
+| 05/08/2026 | 1.0.3 | Adding Image upload function | 노혜인
 
 ---
 

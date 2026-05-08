@@ -1,5 +1,5 @@
 # 오늘 뭐 먹지? '메뉴 랜덤 뽑기 & 맛집 지도'
-<img width="1536" height="1024" alt="ChatGPT Image 2026년 3월 27일 오후 05_52_28" src="https://github.com/user-attachments/assets/e5af55dc-dd6b-4db7-a95a-a03d6147f771" />
+<img width="1536" height="1024" alt="Image 2026년 3월 27일 오후 05_52_28" src="https://github.com/user-attachments/assets/e5af55dc-dd6b-4db7-a95a-a03d6147f771" />
 
 **학번:** 22411896
 **성명:** 노혜인 
@@ -39,7 +39,7 @@
 ---
 
 ## 2. System context diagram
-<img width="1300" height="800" alt="ChatGPT Image 2026년 5월 8일 오후 12_07_26" src="https://github.com/user-attachments/assets/3588341f-975e-414d-9e4f-1ff2d5ecf75c" />
+<img width="1300" height="800" alt="Image 2026년 5월 8일 오후 12_07_26" src="https://github.com/user-attachments/assets/3588341f-975e-414d-9e4f-1ff2d5ecf75c" />
 
 * 로그인 (Login)
 * 회원가입 (Sign up)
@@ -52,6 +52,7 @@
 * 리뷰작성 (Writing review)
 * 리뷰삭제 (Deleting review)
 * 본인인증 (Identity verification)
+* 이미지첨부 (Image upload)
 
 ---
 
@@ -69,7 +70,8 @@
 | 8 | **Operating hours** | User | 운영시간 외의 가게 아이콘은 회색으로 뮤트된다. 
 | 9 | **Writing review** | User | 가게에 방문 후 사진과 텍스트를 입력하여 리뷰를 작성한다.
 | 10 | **Deleting review** | User | 작성한 리뷰를 삭제한다. 
-| 11 | **Identity verification** | User | 간편인증을 통해 본인인증을 한다. 
+| 11 | **Identity verification** | User | 간편인증을 통해 본인인증을 한다.
+| 12 | **Image upload** | User | 이미지를 업로드한다.
 
 ---
 
@@ -90,6 +92,7 @@
 | 9 | **Writing review** | 실제 방문 경험 공유 및 서비스 신뢰도 확보 | 방문 인증 후 텍스트와 사진을 포함한 리뷰 작성/업로드 | 식사 완료 후 다른 사용자에게 정보를 공유하고자 할 때 | 실제 데이터 기반의 정확한 추천 품질을 유지한다. |
 | 10 | **Deleting review** | 작성한 리뷰에 대한 삭제권리 부여 | 작성/업로드한 리뷰 삭제 | 잘못 작성한 또는 잘못된 정보 등의 이유로 리뷰를 삭제하고자 할 때 | 정확하고 솔직한 정보를 제공하기 위한 수단으로써 활용된다. |
 | 11 | **Identity verification** | 보안 강화 및 허위 계정 생성 방지 | 간편인증 API를 연동하여 실명 및 본인 여부 확인 | 회원가입 또는 특정 개인정보 변경 절차 진행 시 | 데이터 보호 및 시스템 보안성을 확보한다. | 
+| 12 | **Image upload** | 현실감있고 진실된 리뷰 작성 | 해당 식당의 음식 이미지 첨부 | 리뷰 작성 시 | 리뷰의 신뢰도와 질을 높인다. | 
 ---
 
 ## 5. Problem statement

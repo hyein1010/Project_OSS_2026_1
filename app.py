@@ -6,8 +6,7 @@ from flask import Flask, request, jsonify, session, send_from_directory, render_
 
 app = Flask(__name__)
 app.secret_key = "o늘뭐먹지_secret_2026"
-UPLOAD_FOLDER = os.path.join(os.path.dirname(__file__), "uploads")
-os.makedirs(UPLOAD_FOLDER, exist_ok=True)
+UPLOAD_FOLDER = "/tmp"
 
 # ═══════════════════════════════════════════════
 #  In-Memory DB  (HashMap 구조)

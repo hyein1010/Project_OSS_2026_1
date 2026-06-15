@@ -5,7 +5,7 @@ from functools import wraps
 from flask import Flask, request, jsonify, session, send_from_directory, render_template
 
 app = Flask(__name__)
-app.secret_key = "o늘뭐먹지_secret_2026"
+app.secret_key = "오늘뭐먹지_secret_2026"
 UPLOAD_FOLDER = "/tmp"
 
 # ═══════════════════════════════════════════════

@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<title>오늘 뭐 먹지?</title>
+<link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+<!-- ══ SPLASH ══ -->
+<div id="page-splash" class="page active">
+  <div class="splash-inner">
+    <div class="splash-dice">🎲</div>
+    <h1 class="splash-title">오늘 뭐 먹지?</h1>
+    <p class="splash-sub">메뉴 랜덤 뽑기 &amp; 맛집 지도</p>
+  </div>
+</div>
+
+<!-- ══ LOGIN ══ -->
+<div id="page-login" class="page">
+  <div class="auth-wrap">
+    <div class="logo-box"><span class="logo-dice">🎲</span><span class="logo-text">오늘 뭐 먹지?</span></div>
+    <div class="card">
+      <h2>로그인</h2>
+      <input id="login-id" type="text" placeholder="아이디" class="inp">
+      <input id="login-pw" type="password" placeholder="비밀번호" class="inp">
+      <div id="login-err" class="err-msg"></div>
+      <button class="btn-primary" onclick="doLogin()">로그인</button>
+      <button class="btn-ghost" onclick="go('page-register')">회원가입</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══ REGISTER ══ -->
+<div id="page-register" class="page">
+  <div class="auth-wrap">
+    <div class="logo-box"><span class="logo-dice">🎲</span><span class="logo-text">오늘 뭐 먹지?</span></div>
+    <div class="card">
+      <h2>회원가입</h2>
+      <input id="reg-id"    type="text"     placeholder="아이디" class="inp">
+      <input id="reg-pw"    type="password" placeholder="비밀번호" class="inp">
+      <input id="reg-name"  type="text"     placeholder="이름" class="inp">
+      <input id="reg-email" type="email"    placeholder="이메일" class="inp">
+      <div id="reg-err" class="err-msg"></div>
+      <button class="btn-primary" onclick="doRegister()">가입하기</button>
+      <button class="btn-ghost"   onclick="go('page-login')">← 로그인으로</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══ MAIN ══ -->
+<div id="page-main" class="page">
+  <!-- 상단 헤더 -->
+  <header class="app-header">
+    <span class="header-logo">🎲 오늘 뭐 먹지?</span>
+    <div class="header-right">
+      <span id="header-user" class="header-user"></span>
+      <button class="icon-btn" onclick="go('page-verify')" title="본인인증">🔐</button>
+      <button class="icon-btn" onclick="doLogout()" title="로그아웃">🚪</button>
+    </div>
+  </header>
+
+  <!-- 필터 바 -->
+  <div class="filter-bar">
+    <select id="flt-category" class="flt-sel">
+      <option value="">전체 카테고리</option>
+      <option value="한식">한식</option><option value="중식">중식</option>
+      <option value="일식">일식</option><option value="양식">양식</option>
+    </select>
+    <select id="flt-weather" class="flt-sel">
+      <option value="">날씨 무관</option>
+      <option value="맑음">☀ 맑음</option><option value="흐림">🌥 흐림</option>
+      <option value="비">🌧 비</option><option value="눈">❄ 눈</option>
+    </select>
+    <select id="flt-price" class="flt-sel">
+      <option value="">가격 무관</option>
+      <option value="8000">~8,000원</option><option value="15000">~15,000원</option>
+      <option value="25000">~25,000원</option>
+    </select>
+  </div>
+
+  <!-- 룰렛 영역 -->
+  <div class="roulette-section">
+    <div id="roulette-ring" class="roulette-ring">
+      <div id="roulette-inner" class="roulette-inner">
+        <span id="roulette-emoji" class="roulette-emoji">🎲</span>
+        <span id="roulette-label">추천 시작!</span>
+      </div>
+    </div>
+    <button id="roulette-btn" class="btn-roulette" onclick="startRoulette()">🎰 메뉴 뽑기</button>
+    <div id="roulette-result" class="roulette-result hidden"></div>
+    <button id="find-store-btn" class="btn-secondary hidden" onclick="findStores()">📍 주변 맛집 보기</button>
+  </div>
+
+  <!-- 탭 -->
+  <div class="tab-bar">
+    <button class="tab-btn active" onclick="switchTab('tab-map',this)">🗺 지도</button>
+    <button class="tab-btn" onclick="switchTab('tab-list',this)">📋 목록</button>
+    <button class="tab-btn" onclick="switchTab('tab-fav',this)">⭐ 즐겨찾기</button>
+  </div>
+
+  <!-- 지도 탭 -->
+  <div id="tab-map" class="tab-content active">
+    <div class="map-controls">
+      <label><input type="checkbox" id="chk-open" onchange="loadStores()"> 영업 중만 보기</label>
+      <select id="srt-by" class="flt-sel" onchange="loadStores()">
+        <option value="distance">거리순</option>
+        <option value="rating">평점순</option>
+      </select>
+    </div>
+    <div id="mock-map" class="mock-map">
+      <div class="map-bg-grid"></div>
+      <div id="map-markers"></div>
+      <div class="map-center-pin">📍<br><small>내 위치</small></div>
+    </div>
+    <div id="map-info-popup" class="map-popup hidden"></div>
+  </div>
+
+  <!-- 목록 탭 -->
+  <div id="tab-list" class="tab-content hidden">
+    <div id="store-list" class="store-list"></div>
+  </div>
+
+  <!-- 즐겨찾기 탭 -->
+  <div id="tab-fav" class="tab-content hidden">
+    <div id="fav-list" class="store-list"></div>
+  </div>
+</div>
+
+<!-- ══ STORE DETAIL ══ -->
+<div id="page-detail" class="page">
+  <div class="detail-header">
+    <button class="back-btn" onclick="go('page-main')">← 뒤로</button>
+    <button id="fav-btn" class="fav-btn" onclick="toggleFavorite()">☆</button>
+  </div>
+  <div id="detail-content" class="detail-content"></div>
+  <!-- 리뷰 작성 -->
+  <div class="review-form card">
+    <h3>✏️ 리뷰 작성</h3>
+    <div class="star-select" id="star-select">
+      <span onclick="setStar(1)">★</span><span onclick="setStar(2)">★</span>
+      <span onclick="setStar(3)">★</span><span onclick="setStar(4)">★</span><span onclick="setStar(5)">★</span>
+    </div>
+    <textarea id="review-text" placeholder="리뷰를 입력하세요..." class="review-inp"></textarea>
+    <div class="upload-row">
+      <label class="upload-label" for="review-img">📷 사진 첨부</label>
+      <input type="file" id="review-img" accept="image/*" onchange="previewImg(this)" style="display:none">
+      <img id="img-preview" class="img-preview hidden">
+    </div>
+    <div id="review-err" class="err-msg"></div>
+    <button class="btn-primary" onclick="submitReview()">리뷰 등록</button>
+  </div>
+  <div id="review-list" class="review-list"></div>
+</div>
+
+<!-- ══ VERIFY ══ -->
+<div id="page-verify" class="page">
+  <div class="auth-wrap">
+    <div class="card">
+      <h2>🔐 본인인증</h2>
+      <p class="hint">테스트 인증번호: <strong>123456</strong></p>
+      <input id="verify-name"  type="text" placeholder="이름" class="inp">
+      <input id="verify-birth" type="text" placeholder="생년월일 (YYYYMMDD)" class="inp">
+      <button class="btn-secondary" onclick="sendVerifyCode()">인증번호 발송</button>
+      <div id="verify-code-area" class="hidden">
+        <input id="verify-code" type="text" placeholder="인증번호 6자리" class="inp">
+        <div id="verify-err" class="err-msg"></div>
+        <button class="btn-primary" onclick="submitVerify()">인증 확인</button>
+      </div>
+      <button class="btn-ghost" onclick="go('page-main')">← 돌아가기</button>
+    </div>
+  </div>
+</div>
+
+<div id="toast" class="toast hidden"></div>
+
+<script src="/static/js/app.js"></script>
+</body>
+</html>
